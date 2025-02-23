@@ -1,7 +1,7 @@
 # main.py
 import save_game
 import systems.systems
-import scavenge.scavenge_main
+import scavenge.scavenge_main  # Kept for reference, but not used in scavenging now
 import fabrication.fabrication
 import ships.shipsNewShip as ships
 import combat.combat_main as combat
@@ -54,7 +54,6 @@ class TextStyle:
         if style.get("italic"):
             ansi += "\033[3m"
         
-        # Use style-specific settings if provided, else fall back to parameters
         delay_to_display = style.get("delay_to_display", delay_to_display)
         display_mode = style.get("display_mode", display_mode)
         char_delay = style.get("char_delay", char_delay)
@@ -71,9 +70,9 @@ class TextStyle:
                     sys.stdout.write(char)
                     sys.stdout.flush()
                     time.sleep(char_delay)
-                print()  # Newline at end
+                print()
         
-        return formatted_text  # Always return the formatted string
+        return formatted_text
 
 TextStyle.load_styles()
 
@@ -598,9 +597,15 @@ def load_game():
         return False
 
 def roll_percentile():
-    tens = random.randint(0, 9) * 10
+    tens = random.randint(0, 9)
     ones = random.randint(1, 9)
-    return tens + ones, f"[d10({tens//10})+{ones}]"
+    roll = tens * 10 + ones
+    return roll, f"[d10({tens}) + {ones}]"
+
+def roll_dice(min_val, max_val, die_name):
+    roll = random.randint(min_val + 1, max_val + 1)  # +1 to shift range for dice (e.g., 1-3 becomes 2-4)
+    result = roll - 1  # Adjust back to 0-based (e.g., 2 becomes 1)
+    return result, f"[{die_name}({roll}) - 1]"
 
 def travel_home():
     global explored, player_data
@@ -712,6 +717,146 @@ def load_space_classification():
         input("Press Enter to continue...")
         return None
 
+def scavenge_items(num_items_to_find, location_type):
+    items = []
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    file_path = os.path.join(script_dir, "items.json")
+    
+    try:
+        with open(file_path, 'r') as file:
+            all_items = json.load(file)
+        
+        available_items = all_items.get(location_type, [])
+        if not available_items:
+            return []
+        
+        for _ in range(num_items_to_find):
+            roll, roll_str = roll_percentile()
+            item_names = [item["name"] for item in available_items]
+            chances = [item["chance"] for item in available_items]
+            item_name = random.choices(item_names, weights=chances, k=1)[0]
+            quantity = random.randint(1, 3)
+            items.append((roll_str, roll, item_name, quantity))
+    except Exception as e:
+        TextStyle.print_class("Warning", f"Error scavenging items: {str(e)}")
+    
+    return items
+
+def scavenge_location():
+    locations_list = []
+    for parent in current_system["children"]:
+        # Add top-level objects (planets, asteroid fields)
+        locations_list.append({"obj": parent, "parent": None})
+        # Add child objects (e.g., Research Posts) if they exist
+        if "children" in parent:
+            for child in parent["children"]:
+                locations_list.append({"obj": child, "parent": parent})
+    
+    if not locations_list:
+        TextStyle.print_class("Warning", "\nNo locations available to scavenge!")
+        input("Press Enter to continue...")
+        return
+    
+    print("\nAvailable locations:")
+    for i, loc in enumerate(locations_list):
+        obj = loc["obj"]
+        parent = loc["parent"]
+        name = obj["name"]
+        scavenged_text = " (scavenged)" if obj.get("scavenged", False) else ""
+        display_name = f"{parent['name']} -> {name}" if parent else name
+        print(f"{i}) {display_name}{scavenged_text if not scavenged_text else TextStyle.print_class('red', scavenged_text, print_output=False)} ({obj['type']})")
+    
+    try:
+        choice = int(input("Select a location to scavenge (0-9): "))
+        if 0 <= choice < len(locations_list):
+            loc = locations_list[choice]
+            obj = loc["obj"]
+            if obj.get("scavenged", False):
+                TextStyle.print_class("Warning", f"\n{obj['name']} has already been scavenged!")
+                input("Press Enter to continue...")
+                return
+            
+            location_name = obj["name"]
+            location_type = "synthetic" if obj["type"] == "Man-Made" else "natural"
+            
+            TextStyle.print_class("Information", "- - -")
+            progress = 0
+            energy_cost = 0
+            
+            stages = [
+                (0, "Plotting Coordinates", 0),
+                (10, "Approaching Site", 0),
+                (20, "Approaching Site", 10),
+                (30, "Scanning Location", 0),
+                (40, "Scanning Location", 2),
+                (50, "Analysing Find", 0),
+                (60, "Analysing Find", 0),
+                (70, "Analysing Find", 3),
+                (80, "Salvaging Item(s)", 0),
+                (90, "Salvaging Item(s)", 5),
+                (100, "Salvage Operation Concluded", 0)
+            ]
+            
+            success_roll, success_roll_str = roll_percentile()
+            threshold = 40
+            items_found = False
+            
+            for percent, message, energy in stages:
+                bar = "#" * (percent // 10) + " " * (10 - percent // 10)
+                extra = ""
+                
+                if percent == 40:
+                    extra = f" {success_roll_str} ({success_roll}%): {'Success' if success_roll >= threshold else 'Failure'}"
+                    items_found = success_roll >= threshold
+                elif percent == 70 and items_found:
+                    num_items, yield_die = roll_dice(1, 3, "d3")
+                    extra = f" {yield_die}: {num_items} Item(s) Found"
+                
+                TextStyle.print_class("Information", f"Scavenging {location_name}: [{bar}] {percent}% - {message}{extra}{' (-' + str(energy) + ' Energy)' if energy > 0 else ''}")
+                time.sleep(0.3)
+                
+                if energy > 0 and player_data["energy"] >= energy:
+                    player_data["energy"] -= energy
+                    energy_cost += energy
+                elif energy > 0:
+                    TextStyle.print_class("Warning", f"Not enough energy! Required: {energy}, Available: {player_data['energy']}")
+                    break
+                
+                if percent == 50 and not items_found:
+                    TextStyle.print_class("Warning", "No resources found. Scavenging aborted.")
+                    break
+            
+            TextStyle.print_class("Information", "- - -")
+            
+            if items_found:
+                num_items, _ = roll_dice(1, 3, "d3")
+                sec_roll, sec_roll_str = roll_dice(0, 1, "d2")
+                TextStyle.print_class("dark-gray", f"Rolling Security Zone Modifier {sec_roll_str}: {sec_roll} Additional Items Found")
+                TextStyle.print_class("Information", "- - -")
+                
+                total_items = num_items + sec_roll
+                found_items = scavenge_items(total_items, location_type)
+                
+                TextStyle.print_class("Information", f"Total Energy Used: {energy_cost}")
+                TextStyle.print_class("Information", f"Total Items Found: {len(found_items)}")
+                for roll_str, roll, item_name, qty in found_items:
+                    TextStyle.print_class("Information", f"- Item {found_items.index((roll_str, roll, item_name, qty)) + 1} {roll_str} ({roll}%): {item_name} ({qty}) Discovered")
+                    for inv_item in ship_inventory:
+                        if inv_item["name"] == item_name:
+                            inv_item["quantity"] += qty
+                            break
+                    else:
+                        ship_inventory.append({"name": item_name, "quantity": qty})
+                obj["scavenged"] = True  # Set flag on the specific object (parent or child)
+            else:
+                TextStyle.print_class("Information", f"Total Energy Used: {energy_cost}")
+                TextStyle.print_class("Information", "Total Items Found: 0")
+            
+            input("Press Enter to continue...")
+    except ValueError:
+        TextStyle.print_class("Warning", "Invalid choice! Please enter a number.")
+        input("Press Enter to continue...")
+
 def main_game_loop():
     global ship_inventory, home_inventory, current_save_file, explored, current_system, player_data
     while True:
@@ -765,7 +910,7 @@ def main_game_loop():
             elif choice == "3":
                 show_ship_inventory()
             elif choice == "4":
-                scavenge.scavenge_main.scavenge_menu(player_data, current_system, ship_inventory)
+                scavenge_location()
             elif choice == "5":
                 fabrication.fabrication.fabrication_menu(player_data, ship_inventory)
             elif choice == "8":
