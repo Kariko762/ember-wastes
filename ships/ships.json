@@ -1,0 +1,31 @@
+{
+    "shipVariables": {
+        "hullRange": {"min": 20, "max": 50},
+        "shieldRange": {"min": 10, "max": 30},
+        "powerRange": {"min": 10, "max": 50},
+        "energyRange": {"min": 50, "max": 200},
+        "storageRange": {"min": 20, "max": 100},
+        "levelRange": {"min": 1, "max": 5}
+    },
+    "shipCustomization": {
+        "classes": [
+            {"name": "Scout", "hullBonus": 0, "shieldBonus": 0, "powerBonus": 10, "energyBonus": 20, "storageBonus": 0, "armorClassRange": {"min": 10, "max": 13}, "disengageRange": {"min": 8, "max": 12}, "chance": 0.4},
+            {"name": "Fighter", "hullBonus": 10, "shieldBonus": 5, "powerBonus": 5, "energyBonus": 0, "storageBonus": -10, "armorClassRange": {"min": 13, "max": 16}, "disengageRange": {"min": 10, "max": 14}, "chance": 0.3},
+            {"name": "Freighter", "hullBonus": 15, "shieldBonus": 0, "powerBonus": -5, "energyBonus": 10, "storageBonus": 30, "armorClassRange": {"min": 11, "max": 14}, "disengageRange": {"min": 12, "max": 16}, "chance": 0.2},
+            {"name": "Cruiser", "hullBonus": 20, "shieldBonus": 10, "powerBonus": 0, "energyBonus": 0, "storageBonus": 0, "armorClassRange": {"min": 15, "max": 19}, "disengageRange": {"min": 14, "max": 18}, "chance": 0.1}
+        ],
+        "weapons": [
+            {"name": "Laser", "damage": "d8", "chance": 0.5},
+            {"name": "Plasma Cannon", "damage": "2d6", "chance": 0.3},
+            {"name": "Ion Blaster", "damage": "d10", "chance": 0.2}
+        ],
+        "alignments": [
+            {"name": "Good", "chance": 0.6},
+            {"name": "Bad", "chance": 0.4},
+            {"name": "Player", "chance": 0.0}
+        ]
+    },
+    "switches": {
+        "multipleWeapons": false
+    }
+}

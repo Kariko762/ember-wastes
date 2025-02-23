@@ -1,0 +1,116 @@
+{
+    "scavengeVariables": {
+        "successThreshold": 40,
+        "itemCountRange": {
+            "min": 1,
+            "max": 3
+        }
+    },
+    "locationMappings": {
+        "Planet": {
+            "resourceCost": 5,
+            "scavengeDuration": 5,
+            "progressMessages": {
+                "10": "Entering Atmosphere",
+                "30": "Landing on Surface",
+                "50": "Deploying Survey Drones",
+                "80": "Extracting Resources",
+                "100": "Resource Extraction Complete"
+            },
+            "resources": [
+                {"name": "Iron Ore", "chance": 0.4},
+                {"name": "Copper Ore", "chance": 0.3},
+                {"name": "Rare Minerals", "chance": 0.2},
+                {"name": "Crystal Fragments", "chance": 0.1}
+            ]
+        },
+        "Moon": {
+            "resourceCost": 5,
+            "scavengeDuration": 5,
+            "progressMessages": {
+                "10": "Approaching Lunar Orbit",
+                "30": "Touching Down on Moon",
+                "50": "Activating Mineral Sensors",
+                "80": "Gathering Lunar Samples",
+                "100": "Sample Collection Finished"
+            },
+            "resources": [
+                {"name": "Iron Ore", "chance": 0.4},
+                {"name": "Copper Ore", "chance": 0.3},
+                {"name": "Rare Minerals", "chance": 0.2},
+                {"name": "Crystal Fragments", "chance": 0.1}
+            ]
+        },
+        "Asteroid Field": {
+            "resourceCost": 14,
+            "scavengeDuration": 3,
+            "progressMessages": {
+                "20": "Entering Asteroid Cluster",
+                "50": "Targeting Resource Nodes",
+                "100": "Harvesting Complete"
+            },
+            "resources": [
+                {"name": "Iron Ore", "chance": 0.5},
+                {"name": "Copper Ore", "chance": 0.3},
+                {"name": "Rare Minerals", "chance": 0.15},
+                {"name": "Crystal Fragments", "chance": 0.05}
+            ]
+        },
+        "Man-Made": {
+            "resourceCost": 10,
+            "scavengeDuration": 7,
+            "progressMessages": {
+                "10": "Docking with Structure",
+                "30": "Accessing Control Systems",
+                "50": "Initiating Deep Scan",
+                "80": "Retrieving Data Logs",
+                "100": "Data Retrieval Complete"
+            },
+            "syntheticItems": [
+                {"name": "Scrap Metal", "chance": 0.4},
+                {"name": "Circuit Board", "chance": 0.3},
+                {"name": "Power Cell", "chance": 0.2},
+                {"name": "Plasma Conduit", "chance": 0.1}
+            ]
+        },
+        "Unknown": {
+            "resourceCost": 20,
+            "scavengeDuration": 10,
+            "progressMessages": {
+                "10": "Approaching Unknown Site",
+                "30": "Probing Wreckage",
+                "50": "Analyzing Debris Field",
+                "80": "Salvaging Viable Parts",
+                "100": "Salvage Operation Concluded"
+            },
+            "syntheticItems": [
+                {"name": "Scrap Metal", "chance": 0.4},
+                {"name": "Circuit Board", "chance": 0.3},
+                {"name": "Power Cell", "chance": 0.2},
+                {"name": "Plasma Conduit", "chance": 0.1}
+            ]
+        }
+    },
+    "siphoning": {
+        "Man-Made": {
+            "successChance": 50,
+            "dockChance": 70,
+            "energyYield": {
+                "Secure Space": 1.0,
+                "Moderately Secure Space": 0.8,
+                "Risky Space": 0.6,
+                "Unsecure Space": 0.4
+            }
+        }
+    },
+    "wreckSalvage": {
+        "successChance": 40,
+        "dockChance": 60,
+        "energyYield": {
+            "Secure Space": 1.0,
+            "Moderately Secure Space": 0.8,
+            "Risky Space": 0.6,
+            "Unsecure Space": 0.4
+        }
+    }
+}

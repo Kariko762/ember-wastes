@@ -1,0 +1,10 @@
+{
+    "styles": {
+        "Information": {"color": "white", "delay_to_display": 0.2, "display_mode": "line"},
+        "Warning": {"color": "red", "bold": true, "delay_to_display": 0.2, "display_mode": "char", "char_delay": 0.05},
+        "Success": {"color": "green", "bold": true, "delay_to_display": 0.2, "display_mode": "char", "char_delay": 0.05},
+        "Energy": {"color": "cyan", "delay_to_display": 0, "display_mode": "instant"},
+        "Hull": {"color": "green", "delay_to_display": 0, "display_mode": "instant"},
+        "Scavenged": {"color": "dark_gray", "delay_to_display": 0, "display_mode": "instant"}
+    }
+}

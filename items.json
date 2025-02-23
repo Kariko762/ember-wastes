@@ -1,0 +1,34 @@
+{
+    "natural": [
+        {"name": "Iron Ore", "chance": 0.30},
+        {"name": "Copper Ore", "chance": 0.25},
+        {"name": "Titanium Ore", "chance": 0.15},
+        {"name": "Crystal Quartz", "chance": 0.10},
+        {"name": "Frozen Water", "chance": 0.20},
+        {"name": "Silicon Rock", "chance": 0.25},
+        {"name": "Nickel Ore", "chance": 0.18},
+        {"name": "Sulfur Deposit", "chance": 0.12},
+        {"name": "Rare Earth Minerals", "chance": 0.05},
+        {"name": "Obsidian Shard", "chance": 0.08},
+        {"name": "Magnesium Ore", "chance": 0.14},
+        {"name": "Volcanic Ash", "chance": 0.17},
+        {"name": "Phosphorus Rock", "chance": 0.09},
+        {"name": "Carbonaceous Chondrite", "chance": 0.06},
+        {"name": "Lithium Crystal", "chance": 0.04}
+    ],
+    "synthetic": [
+        {"name": "Scrap Metal", "chance": 0.30},
+        {"name": "Circuit Board", "chance": 0.25},
+        {"name": "Power Cell", "chance": 0.20},
+        {"name": "Wiring Bundle", "chance": 0.25},
+        {"name": "Processor Chip", "chance": 0.15},
+        {"name": "Memory Module", "chance": 0.12},
+        {"name": "Servo Motor", "chance": 0.18},
+        {"name": "Alloy Plate", "chance": 0.22},
+        {"name": "Sensor Unit", "chance": 0.10},
+        {"name": "Data Core", "chance": 0.08},
+        {"name": "Coolant Canister", "chance": 0.14},
+        {"name": "Optic Fiber", "chance": 0.13},
+        {"name": "Capacitor", "chance": 0.16}
+    ]
+}

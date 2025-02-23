@@ -1,0 +1,22 @@
+{
+    "difficulty_levels": {
+        "easy": {
+            "startingHomeInventory": [
+                {"name": "Scrap Metal", "quantity": 10},
+                {"name": "Circuit Board", "quantity": 5}
+            ]
+        },
+        "medium": {
+            "startingHomeInventory": [
+                {"name": "Scrap Metal", "quantity": 5},
+                {"name": "Circuit Board", "quantity": 3}
+            ]
+        },
+        "hard": {
+            "startingHomeInventory": [
+                {"name": "Scrap Metal", "quantity": 3},
+                {"name": "Circuit Board", "quantity": 1}
+            ]
+        }
+    }
+}

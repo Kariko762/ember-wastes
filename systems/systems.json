@@ -1,0 +1,102 @@
+{
+    "systemVariables": {
+        "planetCount": {"min": 0, "max": 4},
+        "asteroidCount": {"min": 1, "max": 3},
+        "asteroidChance": 90,
+        "moonCount": {"min": 1, "max": 5},
+        "objectIdRange": {"min": 1, "max": 100}
+    },
+    "securityRewards": {
+        "Secure Space": {
+            "energyCost": 10,
+            "extraPlanet": {"min": 0, "max": 0},
+            "extraMoon": {"min": 0, "max": 0},
+            "extraAsteroidField": {"min": 0, "max": 0},
+            "extraManMade": {"min": 0, "max": 0},
+            "extraUnknown": {"min": 0, "max": 0},
+            "chanceBoost": 1.0,
+            "asteroidYieldReRoll": 0,
+            "encounterChanceFactor": 0.2
+        },
+        "Moderately Secure Space": {
+            "energyCost": 20,
+            "extraPlanet": {"min": 0, "max": 1},
+            "extraMoon": {"min": 0, "max": 1},
+            "extraAsteroidField": {"min": 0, "max": 0},
+            "extraManMade": {"min": 0, "max": 1},
+            "extraUnknown": {"min": 0, "max": 0},
+            "chanceBoost": 1.2,
+            "asteroidYieldReRoll": 0,
+            "encounterChanceFactor": 0.4
+        },
+        "Risky Space": {
+            "energyCost": 30,
+            "extraPlanet": {"min": 0, "max": 1},
+            "extraMoon": {"min": 0, "max": 1},
+            "extraAsteroidField": {"min": 0, "max": 1},
+            "extraManMade": {"min": 0, "max": 1},
+            "extraUnknown": {"min": 0, "max": 1},
+            "chanceBoost": 1.4,
+            "asteroidYieldReRoll": 1,
+            "encounterChanceFactor": 0.7
+        },
+        "Unsecure Space": {
+            "energyCost": 40,
+            "extraPlanet": {"min": 0, "max": 1},
+            "extraMoon": {"min": 0, "max": 2},
+            "extraAsteroidField": {"min": 0, "max": 1},
+            "extraManMade": {"min": 1, "max": 2},
+            "extraUnknown": {"min": 1, "max": 2},
+            "chanceBoost": 1.6,
+            "asteroidYieldReRoll": 1,
+            "encounterChanceFactor": 1.0
+        }
+    },
+    "celestial_objects": {
+        "stars": [
+            {"name": "Red Dwarf", "chance": 0.40},
+            {"name": "Yellow Main Sequence", "chance": 0.35},
+            {"name": "Blue Giant", "chance": 0.15},
+            {"name": "White Dwarf", "chance": 0.10}
+        ],
+        "planets": [
+            {"name": "Rocky Planet", "chance": 0.30},
+            {"name": "Gas Giant", "chance": 0.25},
+            {"name": "Ice World", "chance": 0.20},
+            {"name": "Desert Planet", "chance": 0.15},
+            {"name": "Ocean World", "chance": 0.10}
+        ],
+        "moons": [
+            {"name": "Barren Moon", "chance": 0.35},
+            {"name": "Icy Moon", "chance": 0.25},
+            {"name": "Volcanic Moon", "chance": 0.20},
+            {"name": "Temperate Moon", "chance": 0.15},
+            {"name": "Toxic Moon", "chance": 0.05}
+        ]
+    },
+    "asteroid_fields": {
+        "types": [
+            {"name": "Barren", "chance": 0.40, "min_objects": 0, "max_objects": 2},
+            {"name": "Sparse", "chance": 0.30, "min_objects": 1, "max_objects": 4},
+            {"name": "Moderate", "chance": 0.20, "min_objects": 3, "max_objects": 6},
+            {"name": "Rich", "chance": 0.10, "min_objects": 5, "max_objects": 10}
+        ],
+        "base_chance": 0.60
+    },
+    "man_made_objects": [
+        {"name": "Space Station", "chance": 0.20},
+        {"name": "Moon Outpost", "chance": 0.25},
+        {"name": "Orbital Platform", "chance": 0.15},
+        {"name": "Abandoned Settlement", "chance": 0.10},
+        {"name": "Mining Station", "chance": 0.15},
+        {"name": "Research Post", "chance": 0.15}
+    ],
+    "unknown_objects": [
+        {"name": "Distress Beacon", "chance": 0.30},
+        {"name": "Small Conflict Zone", "chance": 0.25, "wreckage": 1},
+        {"name": "Medium Conflict Zone", "chance": 0.15, "wreckage": 3},
+        {"name": "Large Conflict Zone", "chance": 0.10, "wreckage": 5},
+        {"name": "Ancient Ruins", "chance": 0.10},
+        {"name": "Unidentified Signal", "chance": 0.10}
+    ]
+}

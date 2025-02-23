@@ -1,0 +1,8 @@
+{
+    "classifications": {
+        "Secure Space": "Minimal risk and standard rewards. Energy Cost: 10. No extra planets, moons, asteroid fields, man-made, or unknown objects. Encounter Chance: Low (20% of Universal Signature impact).",
+        "Moderately Secure Space": "Moderate risk with slight reward boost. Energy Cost: 20. Chance of 1 extra planet, moon, or man-made object. 20% improved chance for rare items. Encounter Chance: Moderate (40% of Universal Signature impact).",
+        "Risky Space": "Increased risk with better rewards. Energy Cost: 30. Chance of 1 extra planet, moon, asteroid field, man-made, or unknown object. 40% improved chance for rare items, 1 extra asteroid yield roll. Encounter Chance: High (70% of Universal Signature impact).",
+        "Unsecure Space": "High risk with maximum rewards. Energy Cost: 40. Chance of 1 extra planet, up to 2 extra moons, 1 asteroid field, 1-2 man-made, and 1-2 unknown objects. 60% improved chance for rare items, 1 extra asteroid yield roll. Encounter Chance: Very High (100% of Universal Signature impact)."
+    }
+}

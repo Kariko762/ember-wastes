@@ -1,0 +1,6 @@
+{
+    "repair_ratios": {
+        "Scrap Metal": {"hull": 10},
+        "Circuit Board": {"shield": 15}
+    }
+}

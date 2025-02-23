@@ -1,0 +1,12 @@
+{
+    "fabricationVariables": {
+        "energyCells": {
+            "conversionRatio": 10,
+            "successChance": 30
+        },
+        "powerCells": {
+            "conversionRatio": 25,
+            "successChance": 50
+        }
+    }
+}
